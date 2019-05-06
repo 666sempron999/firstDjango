@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from library.views import api_author, api_book
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/authors/', api_author),
+    path('api/books/', api_book),
 ]
