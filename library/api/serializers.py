@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Author, Book
+from library.models import Author, Book
 
 
 
@@ -16,6 +16,3 @@ class BooksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ('author', 'title', 'description', 'year_of_creating')
-
-        # fields = (Author.objects.filter(repo_id__pk=1), 'title', 'description', 'year_of_creating')
-
