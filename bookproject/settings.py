@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'library.apps.LibraryConfig',
     'rest_framework',
+    'rest_framework_swagger',
     'corsheaders',
 ]
 
@@ -70,6 +71,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'bookproject.wsgi.application'
 

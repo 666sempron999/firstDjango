@@ -3,13 +3,13 @@ from library.models import Author, Book
 
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Author
         fields = ('first_name', 'last_name')
 
 
-class BooksSerializer(serializers.ModelSerializer):
+class BooksSerializer(serializers.HyperlinkedModelSerializer):
 
     author = AuthorSerializer()
 
