@@ -18,25 +18,43 @@ class AuthorModelTest(TestCase):
         read test
         """
         author=Author.objects.get(id=1)
-        field_label = author._meta.get_field('first_name').verbose_name
-        self.assertEquals(field_label,'first name')
+        # field_label = author.get_field('first_name').verbose_name
+        field_label = author.first_name
+
+        print("-----------------")
+        print(field_label)
+        print("-----------------")
+
+        self.assertEquals(field_label, 'Aleksandr')
 
     def test_first_name_update(self):
         """
         update first_name test
         """
         author=Author.objects.get(id=1)
-        Author.objects.update(first_name='Aleksandr1')
+        # Author.objects.update(first_name='Aleksandr1')
+        # здесь пока непонятно, как обновить поле (((
+        Author.objects.filter(id=author.id).update(first_name='Aleksandr1')
 
-        field_label = author._meta.get_field('first_name').verbose_name
-        self.assertEquals(field_label, 'first name')
+        field_label = Author.first_name
+
+        print("-----------------")
+        print(field_label)
+        print("-----------------")
 
 
-    def test_first_name_delete(self):
-        author = Author.objects.get(id=1)
-        author.delete()
-        field_label = author._meta.get_field('first_name').verbose_name
-        self.assertEquals(field_label,'first name')
+        self.assertEquals(field_label, 'Aleksandr1')
+
+
+    # def test_first_name_delete(self):
+    #     author = Author.objects.get(id=1)
+    #     author.delete()
+    #     field_label = author.first_name
+    #     self.assertEquals(field_label,'Aleksandr1')
+
+
+
+
 
 
 # class BookModelTest(TestCase):
