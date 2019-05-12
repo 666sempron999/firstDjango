@@ -1,77 +1,72 @@
 from django.test import TestCase
-
-# Create your tests here.
-
 from .models import Author, Book
 
+
 class AuthorModelTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
+
+    def setUp(self):
         """
         create test
         """
-        #Set up non-modified objects used by all test methods
         Author.objects.create(first_name='Aleksandr', last_name='Lenon')
 
     def test_first_name_label(self):
         """
         read test
         """
-        author=Author.objects.get(id=1)
-        # field_label = author.get_field('first_name').verbose_name
-        field_label = author.first_name
-
-        print("-----------------")
-        print(field_label)
-        print("-----------------")
-
-        self.assertEquals(field_label, 'Aleksandr')
+        author = Author.objects.get(id=1)
+        fieldLabel = author.first_name
+        self.assertEquals(fieldLabel, 'Aleksandr')
 
     def test_first_name_update(self):
         """
         update first_name test
         """
-        author=Author.objects.get(id=1)
-        # Author.objects.update(first_name='Aleksandr1')
-        # здесь пока непонятно, как обновить поле (((
-        Author.objects.filter(id=author.id).update(first_name='Aleksandr1')
+        Author.objects.filter(id=1).update(first_name='Aleksandr1')
 
-        field_label = Author.first_name
+        author = Author.objects.get(id=1)
+        fieldLabel = author.first_name
+        self.assertEquals(fieldLabel, 'Aleksandr1')
 
-        print("-----------------")
-        print(field_label)
-        print("-----------------")
+    def test_first_name_delete(self):
 
+        delData = Author.objects.get(id=1)
+        delData.delete()
 
-        self.assertEquals(field_label, 'Aleksandr1')
+        try:
+            # exception when author not exists
+            author = Author.objects.get(id=1)
+        except Exception as e:
+            pass
+        
 
+class BookModelTest(TestCase):
 
-    # def test_first_name_delete(self):
-    #     author = Author.objects.get(id=1)
-    #     author.delete()
-    #     field_label = author.first_name
-    #     self.assertEquals(field_label,'Aleksandr1')
-
-
-
-
-
-
-# class BookModelTest(TestCase):
-#     @classmethod
-#     def setUpTestData(cls):
-#         author = Author.objects.create(first_name='Aleksandr', last_name='Lenon')
-#         Book.objects.create(author=author, title='Home', description='Home home', year_of_creating=1999)
+    def setUp(self):
+        author = Author.objects.create(first_name='Aleksandr', last_name='Lenon')
+        Book.objects.create(author=author, title='Home', description='Home home', year_of_creating=1999)
 
 
-#     def test_title_label(self):
-#         title=Book.objects.get()
-#         field_label = title._meta.get_field('title').verbose_name
-#         self.assertEquals(field_label,'title')
+    def test_title_label(self):
+        title = Book.objects.get(id=1)
+        fieldLabel = title._meta.get_field('title').verbose_name
+        self.assertEquals(fieldLabel,'title')
 
-#     def test_title_update(self):
-#         pass
+    def test_title_update(self):
 
-#     def test_title_delete(self):
-#         pass
+        bookFiled = Book.objects.get(id=1)
+        bookFiled.title = 'Home alone'
+        bookFiled.save()
 
+        bookFiled = Book.objects.get(id=1)
+        self.assertEquals(bookFiled.title, 'Home alone')
+
+
+    def test_title_delete(self):
+        delData = Book.objects.get(id=1).delete()
+
+        try:
+        # exception when title not exists
+            bookFiled = Book.objects.get(id=1)
+        except Exception as e:
+            pass
