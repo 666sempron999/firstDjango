@@ -15,9 +15,13 @@ class AuthorViewSet(viewsets.ModelViewSet):
 
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    filter_fields = ('title', 'description')
 
 
 class BookViewSet(viewsets.ModelViewSet):
 
     queryset = Book.objects.all()
     serializer_class = BooksSerializer
+
+
+
