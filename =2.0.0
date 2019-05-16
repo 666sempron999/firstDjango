@@ -1,0 +1,5 @@
+Collecting django_filters
+  Downloading https://files.pythonhosted.org/packages/5f/ce/71e44492d20f5ae87f18fcc9a4dbc77935e286be32bf8cafb6d0a7b68812/django-filters-0.2.1.zip
+Building wheels for collected packages: django-filters
+  Building wheel for django-filters (setup.py): started
+  Building wheel for django-filters (setup.py): finished with status 'canceled'
